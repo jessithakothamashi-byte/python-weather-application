@@ -1,0 +1,31 @@
+import requests
+
+city = input("Enter city name: ")
+api_key = "YOUR_API_KEY"
+
+url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+
+response = requests.get(url)
+data = response.json()
+
+if response.status_code == 200:
+    temperature = data["main"]["temp"]
+    humidity = data["main"]["humidity"]
+    description = data["weather"][0]["description"]
+
+    print("\nWeather Information")
+    print("City:", city)
+    print("Temperature:", temperature, "°C")
+    print("Humidity:", humidity, "%")
+    print("Condition:", description)
+else:
+    print("City not found. Please try again.")
+
+OUTPUT:
+Enter city name: Hyderabad
+
+Weather Information
+City: Hyderabad
+Temperature: 28.5 °C
+Humidity: 65 %
+Condition: clear sky
